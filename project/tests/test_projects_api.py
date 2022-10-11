@@ -30,7 +30,7 @@ class PrivateTagsApiTests(TestCase):
 
     def setUp(self):
         self.user = get_user_model().objects.create_user(
-            'test@test.com',
+            'test1@test.com',
             'testpass'
         )
         self.client = APIClient()
@@ -38,12 +38,12 @@ class PrivateTagsApiTests(TestCase):
 
     def test_retrieve_projects(self):
         """Test retrieving projects"""
-        Project.objects.create(user=self.user, name='Project1')
-        Project.objects.create(user=self.user, name='Project2')
+        Project.objects.create(user=self.user, name='Projec')
+        Project.objects.create(user=self.user, name='Projet003')
 
         res = self.client.get(PROJECTS_URL)
 
-        projects = Projects.objects.all().order_by('-name')
+        projects = Project.objects.all().order_by('-name')
         serializer = ProjectSerializer(projects, many=True)
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         self.assertEqual(res.data, serializer.data)
@@ -54,8 +54,8 @@ class PrivateTagsApiTests(TestCase):
             'test2@test.com',
             'testpass'
         )
-        PROJECT.objects.create(user=user2, name='Project3')
-        project = PROJECT.objects.create(user=self.user, name='Project4')
+        Project.objects.create(user=user2, name='Project3')
+        project = Project.objects.create(user=self.user, name='Project4')
 
         res = self.client.get(PROJECTS_URL)
 
