@@ -65,3 +65,11 @@ class ModelTests(TestCase):
             name='project001'
         )
         self.assertEqual(str(project), project.name)
+
+    def test_workspace_str(self):
+        """Test the workspace string representation"""
+        workspace = models.Workspace.objects.create(
+            user=sample_user(),
+            name='workspace001'
+        )
+        self.assertEqual(str(workspace), workspace.name)

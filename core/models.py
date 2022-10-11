@@ -62,3 +62,18 @@ class Project(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Workspace(models.Model):
+    """Workspace object"""
+    name = models.CharField(max_length=255)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE
+    )
+    # workspace va a tener varios projects
+    projects = models.ManyToManyField('Project')
+    tags = models.ManyToManyField('Tag')
+
+    def __str__(self):
+        return self.name
