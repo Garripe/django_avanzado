@@ -57,3 +57,11 @@ class ModelTests(TestCase):
             name='Project1'
         )
         self.assertEqual(str(tag), tag.name)
+
+    def test_projects_str(self):
+        """Test the project string representation"""
+        project = models.Project.objects.create(
+            user=sample_user(),
+            name='project001'
+        )
+        self.assertEqual(str(project), project.name)
